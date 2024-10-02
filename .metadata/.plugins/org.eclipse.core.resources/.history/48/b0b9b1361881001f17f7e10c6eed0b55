@@ -20,6 +20,8 @@ public class HospitalService {
 
 	private Scanner sc = new Scanner(System.in);
 
+
+
 	Set<Admin> admin = new LinkedHashSet<Admin>();
 
 	List<Admin> login = new ArrayList<Admin>(); // 로그인한 사람에 대한 정보 넣을 리스트
@@ -52,12 +54,13 @@ public class HospitalService {
 
 	}
 
+
 	public void displayMenu() {
 		System.out.println();
 		System.out.println("===========병원 환자관리 프로그램입니다.==========");
 		System.out.println();
 
-		int menuNum = 0;
+		int menuNum = 0; 
 		do {
 			System.out.println("1. 로그인");
 			System.out.println("2. 관리자 회원가입");
@@ -86,13 +89,13 @@ public class HospitalService {
 			} catch (InputMismatchException e) {
 				System.out.println("\n 숫자를 입력하시지 않았습니다. 다시 시도해 주세요 ");
 
-				sc.nextLine();
+				sc.nextLine(); 
 
-				menuNum = -1;
+				menuNum = -1; 
 			}
 
-		} while (menuNum != 0);
-
+		} while (menuNum != 0); 
+								
 	}
 
 	/**
@@ -113,11 +116,12 @@ public class HospitalService {
 				System.out.println("이미 존재하는 아이디입니다. 다시 입력하세요 ");
 				adminAdd();
 
-				break;
+				break; 
 			}
 		}
 
 		System.out.println(" @@ 사용 가능한 id 입니다.");
+
 
 		System.out.print("비밀번호:");
 
@@ -152,6 +156,7 @@ public class HospitalService {
 		System.out.println("회원가입 성공! 다시 로그인 해주세요");
 		admin.add(new Admin(id, pw1, pw2, birth));
 
+
 		adminLogin();
 
 	}
@@ -181,13 +186,13 @@ public class HospitalService {
 				break;
 			}
 
+
 		}
 		System.out.println("로그인 실패 다시 로그인해주세요");
 		adminLogin();
 	}
 
-	/**
-	 * 관리자메뉴
+	/**관리자메뉴 
 	 * 
 	 */
 	public void adminMenu() {
@@ -225,6 +230,7 @@ public class HospitalService {
 				case 5:
 					departmentList();
 					break;
+			
 
 				case 0:
 					System.out.println("프로그램 종료");
@@ -236,15 +242,19 @@ public class HospitalService {
 			} catch (InputMismatchException e) {
 				System.out.println("\n 숫자를 입력하시지 않았습니다. 다시 시도해 주세요 ");
 
-				sc.nextLine(); 
-				menuNum = -1;
+				sc.nextLine(); // 입력버퍼에 남아있는 잘못된 코드 제거
+
+				menuNum = -1; // 첫 반복 시 잘못 입력하는 경우
+				// menuNum이 0을 가지고 있어 종료되는데
+				// 이를 방지하기 위해 임의 값 -1 대입
 			}
 
-		} while (menuNum != 0); 
+		} while (menuNum != 0); // false일 경우 do while문 종료
+								// true 일경우 do부분 실행문 실행
 	}
 
-	/**
-	 * 환자 리스트 조회 (입원일 순으로 정렬)
+
+	/**환자 리스트 조회 (입원일 순으로 정렬)
 	 * 
 	 */
 	public void patientListByday() {
@@ -264,10 +274,10 @@ public class HospitalService {
 		System.out.println("  총  " + ptNum + "  분이 입원중입니다.");
 		System.out.println();
 
+		
 	}
 
-	/**
-	 * 환자 추가 메서드
+	/**환자 추가 메서드
 	 * 
 	 */
 	public void patientAdd() {
@@ -281,6 +291,7 @@ public class HospitalService {
 		System.out.print("환자 생년월일 -8 자리로 입력하세요");
 		String birth = sc.next();
 
+				
 		System.out.print("환자 성별 - m / w");
 		char gender = sc.next().toUpperCase().charAt(0);
 
@@ -293,9 +304,11 @@ public class HospitalService {
 		System.out.print("입원일  -8 자리로 입력하세요");
 		int day = sc.nextInt();
 
+		
+		
 		Patient newPatient = new Patient(name, birth, gender, pNumber, department, day);
-		System.out.println("====환자 추가 완료====");
-
+		System.out.println("====환자 추가 완료===="); 
+	
 		patient.add(newPatient);
 
 	}
@@ -313,6 +326,7 @@ public class HospitalService {
 
 		System.out.println("입원일 입력");
 		int day = sc.nextInt();
+
 
 		for (Patient ptRmove : patient) {
 			if (ptRmove.getName().equals(name)) {
@@ -336,8 +350,7 @@ public class HospitalService {
 		}
 	}
 
-	/**
-	 * 환자 개인정보 수정 메서드
+	/**환자 개인정보 수정 메서드
 	 * 
 	 */
 	public void patientUpdate() {
@@ -351,11 +364,13 @@ public class HospitalService {
 		for (Patient pt : patient) {
 			if (!(pt.getName().equals(ptName))) {
 
-				System.out.println("해당 환자는 존재하지 않습니다.");
-				break;
-
-			} else {
-
+				System.out.println("해당 환자는 존재하지 않습니다."){
+					
+					
+				}else {
+				
+				
+				
 				System.out.println(ptName + "환자님 수정할 항목을 선택하세요");
 				System.out.println("1. 연락처");
 				System.out.println("2. 담당과");
@@ -381,14 +396,22 @@ public class HospitalService {
 					break;
 				}
 
-			}
+			} 
 		}
 	}
 
+//	public void doctorList() {
+//		System.out.println();
+//		System.out.println("   교수 명단 입니다.");
+//
+//		for (Doctor dt : doctor) {
+//			System.out.println(dt);
+//			System.out.println();
+//		}
+//	}
 
-
-	/**
-	 * 교수 리스트 조회 ( 각 과 별로 조회)
+	
+	/**교수 리스트 조회 ( 각 과 별로 조회)
 	 * 
 	 */
 	public void departmentList() {
@@ -418,5 +441,7 @@ public class HospitalService {
 
 		}
 	}
+
+	
 
 }
